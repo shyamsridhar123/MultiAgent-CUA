@@ -1,4 +1,5 @@
 # Computer Use Assistant (CUA)
+> **Important:** You must apply for access in order to use the Computer Use model. Apply here: https://aka.ms/oai/cuaaccess
 
 This is a sample repository demonstrating how to use the Computer Use model, an AI model capable of interacting with graphical user interfaces (GUIs) through natural language instructions. The Computer Use model can understand visual interfaces, take actions, and complete tasks by controlling a computer just like a human would.
 
