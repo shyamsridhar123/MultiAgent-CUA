@@ -164,7 +164,7 @@ class Agent:
             next_input = openai.types.responses.response_input_param.ComputerCallOutput(
                 type = "computer_call_output",
                 call_id = self.state.previous_computer_id,
-                output = openai.types.responses.response_input_param.ComputerCallOutputOutput(
+                output = openai.types.responses.response_input_param.ResponseComputerToolCallOutputScreenshotParam(
                     type = "computer_screenshot",
                     image_url = f"data:image/png;base64,{screenshot}"),
                 acknowledged_safety_checks = self.state.pending_safety_checks)
