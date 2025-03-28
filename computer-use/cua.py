@@ -174,9 +174,8 @@ class Agent:
                 content = user_message)
         tools = [self.computer_tool()]
         self.state = None
-        retry = 16
         wait_time = 0
-        while retry > 0:
+        for _ in range(10):
             try:
                 time.sleep(wait_time)
                 next_response = self.client.responses.create(
@@ -188,24 +187,10 @@ class Agent:
                     truncation = "auto")
                 self.state = State(next_response)
                 return
-            except openai.OpenAIError as error:
-                if error.status_code == 429:
-                    retry -= 1
-                    wait_time = 10
-                    if error.code == "rate_limit_exceeded" and hasattr(error, 'message'):
-                        match = re.search(r"Please try again in (\d+)s", error.message)
-                        if match:
-                            wait_time = int(match.group(1))
-                            logger.info("Rate limit exceeded. Waiting for %s seconds.", wait_time)
-                        else:
-                            logger.info("Rate limit exceeded. Cannot parse wait time: %s", error.message)
-                    elif 'type' in error and error['type'] == 'rate_limit_error':
-                        logger.info("Rate limit error. Waiting for %s seconds.", wait_time)
-                else:
-                    logger.critical(str(error))
-            except Exception as error: # pylint: disable=broad-except
-                logger.critical("Error: %s", error)
-                retry = 0
+            except openai.RateLimitError as e:
+                match = re.search(r"Please try again in (\d+)s", e.message)
+                wait_time = int(match.group(1)) if match else 10
+                logger.info("Rate limit exceeded. Waiting for %s seconds.", wait_time)
         logger.critical("Max retries exceeded.")
 
     def computer_tool(self):
