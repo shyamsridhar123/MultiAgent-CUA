@@ -165,7 +165,9 @@ class Agent:
         response_input_param = openai.types.responses.response_input_param
         for item in self.response.output:
             if item.type == "computer_call":
-                assert len(inputs) == 0
+                if (len(inputs) > 0):
+                    types = ", ".join([item.type for item in self.response.output])
+                    raise ValueError(f"Unexpected '{item.type}' in '{types}'.")
                 action, action_args = self.actions[0]
                 method = getattr(self.computer, action)
                 method(**action_args)
@@ -181,7 +183,9 @@ class Agent:
                 )
                 inputs.append(output)
             elif item.type == "message":
-                assert len(inputs) == 0
+                if (len(inputs) > 0):
+                    types = ", ".join([item.type for item in self.response.output])
+                    raise ValueError(f"Unexpected '{item.type}' in '{types}'.")
                 message = response_input_param.Message(
                     role="user", content=user_message
                 )
