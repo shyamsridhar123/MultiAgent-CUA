@@ -1,40 +1,41 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px', 'fontFamily': 'Arial, sans-serif'}}}%%
 flowchart TD
     subgraph "Main Execution Options"
         direction LR
         
         subgraph main.py["💻 main.py"]
-            m1[User Input] ===|Instructions| m2[Local Computer\nSetup]
-            m2 ===|Screenshots| m3[Computer Use\nAssistant API]
-            m3 ===|Actions| m4[Execute on\nLocal Computer]
-            m4 ===|Loop| m2
+            m1["<b>User Input</b>"] -->|Instructions| m2["<b>Local Computer</b><br>Setup"]
+            m2 -->|Screenshots| m3["<b>Computer Use</b><br>Assistant API"]
+            m3 -->|Actions| m4["<b>Execute on</b><br>Local Computer"]
+            m4 -->|Loop| m2
         end
         
         subgraph main_playwright["🌐 main_playwright.py"]
-            p1[User Input] ===|Instructions| p2[Playwright Browser\nSetup]
-            p2 ===|Screenshots| p3[Computer Use\nAssistant API]
-            p3 ===|Actions| p4[Execute via\nPlaywright]
-            p4 ===|Loop with Circuit\nBreaker & Recovery| p2
-            p5[Direct\nNavigator] -.-|Optional\nDirect URL\nNavigation| p2
+            p1["<b>User Input</b>"] -->|Instructions| p2["<b>Playwright Browser</b><br>Setup"]
+            p2 -->|Screenshots| p3["<b>Computer Use</b><br>Assistant API"]
+            p3 -->|Actions| p4["<b>Execute via</b><br>Playwright"]
+            p4 -->|Loop with Circuit<br>Breaker & Recovery| p2
+            p5["<b>Direct</b><br>Navigator"] -.->|Optional Direct<br>URL Navigation| p2
         end
         
         subgraph crew_orchestration["🧠 crew_orchestration.py"]
-            c1[User Input] ===|Task| c2[LangChain\nOrchestrator]
-            c2 ===|High-level\nPlanning| c3[LangChain Tool\nSelection]
-            c3 ===|Browser\nInteraction| c4[Computer Use\nAssistant API]
-            c4 ===|Actions| c5[Playwright\nExecution]
-            c5 ===|Observations| c2
-            c2 ===|Reports| c6[Generate\nInsights]
+            c1["<b>User Input</b>"] -->|Task| c2["<b>LangChain</b><br>Orchestrator"]
+            c2 -->|High-level<br>Planning| c3["<b>LangChain Tool</b><br>Selection"]
+            c3 -->|Browser<br>Interaction| c4["<b>Computer Use</b><br>Assistant API"]
+            c4 -->|Actions| c5["<b>Playwright</b><br>Execution"]
+            c5 -->|Observations| c2
+            c2 -->|Reports| c6["<b>Generate</b><br>Insights"]
         end
     end
     
-    m3 -.-|Azure OpenAI| API1[Azure OpenAI\nCUA Model]
-    p3 -.-|Azure OpenAI| API1
-    c4 -.-|Azure OpenAI| API1
-    c2 -.-|Azure OpenAI| API2[Azure OpenAI\nGPT-4.1]
+    m3 -.->|Azure OpenAI| API1["<b>Azure OpenAI</b><br>CUA Model"]
+    p3 -.->|Azure OpenAI| API1
+    c4 -.->|Azure OpenAI| API1
+    c2 -.->|Azure OpenAI| API2["<b>Azure OpenAI</b><br>GPT-4.1"]
     
-    classDef api fill:#f9f,stroke:#333,stroke-width:2px
-    classDef component fill:#bbf,stroke:#333,stroke-width:1px
-    classDef execution fill:#dfd,stroke:#333,stroke-width:2px
+    classDef api fill:#f0d4ff,stroke:#8A2BE2,stroke-width:3px
+    classDef component fill:#d0e4ff,stroke:#0066CC,stroke-width:2px
+    classDef execution fill:#c8f0c8,stroke:#006400,stroke-width:3px
     
     class API1,API2 api
     class m1,m2,m3,m4,p1,p2,p3,p4,p5,c1,c2,c3,c4,c5,c6 component
