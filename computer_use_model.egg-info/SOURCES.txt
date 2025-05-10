@@ -1,0 +1,16 @@
+LICENSE.md
+README.md
+pyproject.toml
+computer-use/crew_browser_tools.py
+computer-use/crew_orchestration.py
+computer-use/cua.py
+computer-use/direct_navigator.py
+computer-use/local_computer.py
+computer-use/main.py
+computer-use/main_playwright.py
+computer-use/playwright_computer.py
+computer_use_model.egg-info/PKG-INFO
+computer_use_model.egg-info/SOURCES.txt
+computer_use_model.egg-info/dependency_links.txt
+computer_use_model.egg-info/requires.txt
+computer_use_model.egg-info/top_level.txt

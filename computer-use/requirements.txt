@@ -1,3 +1,0 @@
-openai>=1.68.2
-pyautogui>=0.9.54
-Pillow>=11.1.0

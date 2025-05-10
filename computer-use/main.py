@@ -30,13 +30,13 @@ async def main():
         help="The endpoint to use, either OpenAI or Azure OpenAI")
     parser.add_argument("--autoplay", dest="autoplay", action="store_true",
         default=True, help="Autoplay actions without confirmation")
-    parser.add_argument("--environment", dest="environment", default="linux")
+    parser.add_argument("--environment", dest="environment", default="Windows")
     args = parser.parse_args()
 
     if args.endpoint == "azure":
         client = openai.AsyncAzureOpenAI(
-            azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-            api_key=os.environ["AZURE_OPENAI_API_KEY"],
+            azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT_COMPUTER_USE"],
+            api_key=os.environ["AZURE_OPENAI_KEY_COMPUTER_USE"],
             api_version="2025-03-01-preview",
         )
     else:
@@ -79,7 +79,7 @@ async def main():
             logger.info(f"  {action} {action_args}")
         if agent.messages:
             logger.info("")
-            logger.info(f"Agent: {"".join(agent.messages)}")
+            logger.info(f"Agent: {''.join(agent.messages)}")
 
 if __name__ == "__main__":
     asyncio.run(main())

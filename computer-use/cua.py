@@ -105,7 +105,7 @@ class Agent:
         self.computer = computer
         self.logger = logger
         self.tools = {}
-        self.repsonse = None
+        self.response = None
 
     def add_tool(self, tool: dict, func):
         name = tool["name"]
