@@ -286,7 +286,7 @@ By combining these technologies, we achieve a robust automation system that can 
 
 ### 📋 Prerequisites
 
-* 🐍 Python 3.7 or higher
+* 🐍 Python 3.8 or higher
 * 💻 Operating System: Windows, macOS, or Linux
 * 🔑 OpenAI API key or Azure OpenAI credentials
 
@@ -294,35 +294,54 @@ By combining these technologies, we achieve a robust automation system that can 
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
-cd computer-use
+git clone https://github.com/shyamsridhar123/MultiAgent-CUA.git
+cd MultiAgent-CUA
 ```
 
-2. Install the required packages:
+2. Install the project using uv (recommended):
 ```bash
-pip install -r requirements.txt
+# Install uv if you don't have it
+pip install uv
+
+# Install the project with all dependencies
+uv pip install -e .
+
+# For development with additional testing tools
+uv pip install -e ".[dev]"
 ```
 
-3. Set up your environment variables:
-
-**For macOS or Linux:**
+3. Alternatively, install with pip directly:
 ```bash
-# Azure OpenAI
-export AZURE_OPENAI_ENDPOINT="your-azure-endpoint"
-export AZURE_OPENAI_API_KEY="your-azure-api-key"
+# Install the project with all dependencies
+pip install -e .
 
-# OpenAI
-export OPENAI_API_KEY="your-openai-api-key"
+# For development with additional testing tools
+pip install -e ".[dev]"
 ```
-**For Windows:**
-```powershell
-# Azure OpenAI
-setx AZURE_OPENAI_ENDPOINT "your-azure-endpoint"
-setx AZURE_OPENAI_API_KEY "your-azure-api-key"
 
-# OpenAI
-setx OPENAI_API_KEY "your-openai-api-key"
+### 📚 Project Structure
+
+This project uses modern Python packaging with `pyproject.toml`:
+
 ```
+multiagent-cua/
+├── pyproject.toml         # Project dependencies and metadata
+├── computer-use/          # Main package directory
+│   ├── main.py            # Basic local computer control
+│   ├── main_playwright.py # Enhanced browser automation
+│   └── crew_orchestration.py # LangChain-based orchestration
+├── .env.sample           # Environment variable template
+└── README.md             # Project documentation
+```
+
+#### 🧩 Dependencies
+
+The project's core dependencies are defined in `pyproject.toml`:
+
+- **API Integration**: openai, azure-identity
+- **Browser Automation**: playwright
+- **Multi-Agent Framework**: langchain, crewai
+- **Utilities**: python-dotenv, pydantic, pillow, numpy
 
 ## 🔧 Usage Options
 
