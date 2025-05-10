@@ -423,10 +423,14 @@ wheels/
 
 # Environment variables
 .env
+.env.*
+!.env.sample
+!.env.example
 .venv
 env/
 venv/
 ENV/
+pythonenv*
 
 # Project specific
 logs/*
